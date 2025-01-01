@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/malfunkt/iprange"
 	"log"
 )
@@ -13,4 +14,8 @@ func main() {
 	log.Printf("%v", list)
 	rng := list.Expand()
 	log.Printf("%s", rng)
+	for q, r := range rng{
+		fmt.Println(r)
+		fmt.Println(q)
+	}
 }
