@@ -56,14 +56,13 @@ func Start(ctx *cli.Context) error {
 	if ctx.IsSet("length") {
 		snapshotLen = int32(ctx.Int("len"))
 	}
-	// Open device
+
 	handle, err = pcap.OpenLive(DeviceName, snapshotLen, promiscuous, timeout)
 	if err != nil {
 		logger.Log.Fatal(err)
 	}
 	defer handle.Close()
 
-	// Set filter
 	if ctx.IsSet("filter") {
 		filter = ctx.String("filter")
 	}

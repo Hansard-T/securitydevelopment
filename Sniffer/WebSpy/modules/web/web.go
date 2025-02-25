@@ -20,8 +20,6 @@ var (
 func reader(ws *websocket.Conn) {
 	defer ws.Close()
 	ws.SetReadLimit(5120)
-	// ws.SetReadDeadline(time.Now().Add(pongWait))
-	// ws.SetPongHandler(func(string) error { ws.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 		_, _, err := ws.ReadMessage()
 		if err != nil {
@@ -36,7 +34,6 @@ func writer(ws *websocket.Conn) {
 		if v != nil {
 			req, ok := v.(string)
 			if ok {
-				// ws.SetWriteDeadline(time.Now().Add(writeWait))
 				if err := ws.WriteMessage(websocket.TextMessage, []byte(req)); err != nil {
 					return
 				}
